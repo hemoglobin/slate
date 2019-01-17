@@ -1,0 +1,39 @@
+# BULK-REPORT Endpoint
+
+If reporting IP addresses one by one may not seem efficient to you, we offer an endpoint that allows a CSV file of IPs to be reported in one shot. Such a list can be extracted from your secure log file or similar. See the [bulk report form](https://www.abuseipdb.com/bulk-report) for a guide.
+
+```shell
+# POST the submission.
+curl https://api.abuseipdb.com/api/v2/bulk-report \
+  -F csv=@report.csv \
+  -H "Key: $YOUR_API_KEY" \
+  -H "Accept: application/json" \
+  > output.json
+```
+
+> The response will inform you how many IPs were successfully reported, and which ones were rejected and why.
+
+```json
+  {
+    "data": {
+      "savedReports": 60,
+      "invalidReports": [
+        {
+          "error": "Duplicate IP",
+          "input": "41.188.138.68",
+          "rowNumber": 5
+        },
+        {
+          "error": "Invalid IP",
+          "input": "127.0.foo.bar",
+          "rowNumber": 6
+        },
+        {
+          "error": "Invalid Category",
+          "input": "189.87.146.50",
+          "rowNumber": 8
+        }
+      ]
+    }
+  }
+```
