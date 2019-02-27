@@ -106,7 +106,7 @@ By default, the blacklist with default parameters is cached for one day. Results
 
 ## Blacklist IP Truncation
 
-To conserve bandwidth, the number of IP addresses included in the list is capped to 10,000. Premium subscribers can overcome this limit. All users can set it between 1 and 10,000 using the `limit` parameter.
+To conserve bandwidth, the number of IP addresses included in the list is capped to 10,000. Subscribers can overcome this limit. All users can set it between 1 and 10,000 using the `limit` parameter.
 
 ## Blacklist Parameters
 
