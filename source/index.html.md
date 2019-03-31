@@ -14,6 +14,7 @@ includes:
   - check_endpoint
   - blacklist_endpoint
   - report_endpoint
+  - check_block_endpoint
   - bulk_report_endpoint
   - rate_limits
   - errors

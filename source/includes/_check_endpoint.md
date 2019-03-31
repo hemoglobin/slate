@@ -55,7 +55,7 @@ The `maxAgeInDays` parameter determines how far back in time we go to fetch repo
 
 Reports are included in this response because the `verbose` flag was added. Omitting the `verbose` flag will exclude reports and the country name field. If you want to keep your response payloads light, this is recommended.
 
-The IP address should be url-encoded, because IPv6 addresses use colons, which are reserved characters in HTTP requests.
+The IP address should be url-encoded, because IPv6 addresses use colons, which are reserved characters in URIs.
 
 ### Check Parameters
 

@@ -33,7 +33,8 @@ curl -G https://api.abuseipdb.com/api/v2/blacklist \
       "ipAddress": "191.96.249.183",
       "totalReports": 325,
       "abuseConfidenceScore": 100
-    }
+    },
+    ...
   ]
 }
 ```
