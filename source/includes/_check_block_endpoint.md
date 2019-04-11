@@ -3,7 +3,7 @@
 ```shell
 # The -G option will convert form parameters (-d options) into query parameters.
 # The CHECK-BLOCK endpoint is a GET request.
-curl -G https://api.abuseipdb.com/api/v2/check \
+curl -G https://api.abuseipdb.com/api/v2/check-block \
   --data-urlencode "network=1270.0.0.1/16" \
   -d maxAgeInDays=15 \
   -H "Key: $YOUR_API_KEY" \
