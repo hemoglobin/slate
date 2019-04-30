@@ -47,7 +47,9 @@ curl -G https://api.abuseipdb.com/api/v2/check \
 
 The `check` endpoint accepts a single IP address (v4 or v6). Optionally you may set the `maxAgeInDays` parameter to only return reports within the last x amount of days.
 
-The desired data is stored in the `data` property. Here you can inspect details regarding the IP address queried, such as version, country of origin, usage type,  ISP, and domain name. And of course, there is the valuable abusive reports.
+The desired data is stored in the `data` property. Here you can inspect details regarding the IP address queried, such as version, country of origin, usage type, ISP, and domain name. And of course, there is the valuable abusive reports.
+
+Geolocation, usage type, ISP, and domain name are sourced from the [IP2Location™ IP Address Geolocation Database](https://www.ip2location.com/database/ip2location). If you're looking for a performant IP database for geolocation, then use their product directly.
 
 The `isWhitelisted` property reflects whether the IP is spotted in *any* of our whitelists. Our whitelists give the benefit of the doubt to many IPs, so it generally should not be used as a basis for action. The `abuseConfidenceScore` is a better basis for action, because it is nonbinary and allows for nuance. The `isWhitelisted` property may be null if a whitelist lookup was not performed.
 
