@@ -2,7 +2,7 @@
 
 ```shell
 # The -G option will convert form parameters (-d options) into query parameters.
-# The CHECK endpoint is a GET request.
+# The BLACKLIST endpoint is a GET request.
 curl -G https://api.abuseipdb.com/api/v2/blacklist \
   -d countMinimum=15 \
   -d maxAgeInDays=60 \
