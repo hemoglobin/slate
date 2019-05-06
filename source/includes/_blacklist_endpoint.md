@@ -58,6 +58,10 @@ In the `meta` block we include `generatedAt` property that lets you check for th
 
 Subscribers may set the self flag, which configures the blacklist generator to only consider reports from their own account.
 
+<aside class="notice">
+The maxAgeInDays, countMinimum, and abuseConfidenceScore parameters are subscriber features. This is because custom blacklists take more juice to generate on-demand. Should your subscriber status lapse, an error response will not be thrown. Rather, the response will degrade gracefully to the simple blacklist. This works nicely with existing firewall software.
+</aside>
+
 ## Plaintext Blacklist
 
 ```shell
@@ -118,4 +122,4 @@ To conserve bandwidth, the number of IP addresses included in the list is capped
 | confidenceMinimum | no       | 100     | 25  | 100  | yes                                               |
 | limit             | no       | 10,000  | 1   |      | restricted, [see above](#blacklist-ip-truncation) |
 | plaintext         |          |         |     |      | no                                                |
-| self              |          |         |     |      |                                                   |
+| self              |          |         |     |      | yes                                               |
