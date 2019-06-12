@@ -16,10 +16,10 @@ curl -G https://api.abuseipdb.com/api/v2/check-block \
   {
     "data": {
       "networkAddress": "127.0.0.0",
-      "netmask": "255.255.0.0",
+      "netmask": "255.255.255.0",
       "minAddress": "127.0.0.1",
-      "maxAddress": "127.0.255.254",
-      "numPossibleHosts": 65534,
+      "maxAddress": "127.0.0.254",
+      "numPossibleHosts": 254,
       "addressSpaceDesc": "Loopback",
       "reportedAddress": [
         {
