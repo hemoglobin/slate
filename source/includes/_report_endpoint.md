@@ -9,7 +9,32 @@ curl https://api.abuseipdb.com/api/v2/report \
   -H "Key: $YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
+```python
+import requests
+import json
 
+# Defining the api-endpoint
+url = 'https://api.abuseipdb.com/api/v2/report'
+
+headers = {
+'Accept': 'application/json',
+'Key': '$YOUR_API_KEY'
+}
+# String holding parameters to pass in json format
+params = {
+'ip':'180.126.219.126',
+'verbose':'',
+'categories':'18,20',
+'comment':'SSH login attempts with user root.'
+}
+
+
+response = requests.request(method='POST', url=url, headers=headers, params=params)
+
+# Formatted output
+decodedResponse = json.loads(response.text)
+print json.dumps(decodedResponse, sort_keys=True, indent=4)
+```
 > Response:
 
 ```json

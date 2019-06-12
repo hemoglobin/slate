@@ -10,7 +10,28 @@ curl https://api.abuseipdb.com/api/v2/bulk-report \
   -H "Accept: application/json" \
   > output.json
 ```
+```python
+import requests
+import json
 
+# Defining the api-endpoint
+url = 'https://api.abuseipdb.com/api/v2/bulk-report'
+
+files = {
+'csv': ('report.csv', open('report.csv', 'rb'))
+}
+
+headers = {
+'Accept': 'application/json',
+'Key': '$YOUR_API_KEY'
+}
+
+response = requests.request(method='POST', url=url, headers=headers, files=files)
+
+# Formated output
+decodedResponse = json.loads(response.text)
+print json.dumps(decodedResponse, sort_keys=True, indent=4)
+```
 > The response will inform you how many IPs were successfully reported, and which ones were rejected and why.
 
 ```json

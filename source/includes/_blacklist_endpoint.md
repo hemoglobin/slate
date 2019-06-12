@@ -10,7 +10,31 @@ curl -G https://api.abuseipdb.com/api/v2/blacklist \
   -H "Key: $YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
+```python
+import requests
+import json
 
+# Defining the api-endpoint
+url = 'https://api.abuseipdb.com/api/v2/blacklist'
+
+querystring = {
+'ipAddress':'180.126.219.126',
+'countMinimum':'15',
+'maxAgeInDays':'60',
+'confidenceMinimum':'90'
+}
+
+headers = {
+'Accept': 'application/json',
+'Key': '$YOUR_API_KEY'
+}
+
+response = requests.request(method='GET', url=url, headers=headers, params=querystring)
+
+# Formatted output
+decodedResponse = json.loads(response.text)
+print json.dumps(decodedResponse, sort_keys=True, indent=4)
+```
 > This will yield the following JSON response:
 
 ```json

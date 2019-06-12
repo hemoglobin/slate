@@ -3,6 +3,7 @@ title: AbuseIPDB APIv2 Documentation
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
+  - python
 
 toc_footers:
   - <a href='https://www.abuseipdb.com/account/api'>Sign Up for a Developer Key</a>
