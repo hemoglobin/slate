@@ -18,13 +18,13 @@ import json
 url = 'https://api.abuseipdb.com/api/v2/check'
 
 querystring = {
-'ipAddress': '118.25.6.39',
-'verbose': ''
+    'ipAddress': '118.25.6.39',
+    'maxAgeInDays': '90'
 }
 
 headers = {
-'Accept': 'application/json',
-'Key': '$YOUR_API_KEY'
+    'Accept': 'application/json',
+    'Key': '$YOUR_API_KEY'
 }
 
 response = requests.request(method='GET', url=url, headers=headers, params=querystring)
@@ -32,6 +32,29 @@ response = requests.request(method='GET', url=url, headers=headers, params=query
 # Formatted output
 decodedResponse = json.loads(response.text)
 print json.dumps(decodedResponse, sort_keys=True, indent=4)
+```
+
+```php
+<?php
+$client = new GuzzleHttp\Client([
+  'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+]);
+
+$response = $client->request('GET', 'check', [
+	'query' => [
+		'ipAddress' => '118.25.6.39',
+		'maxAgeInDays' => '90',
+	],
+	'headers' => [
+		'Accept' => 'application/json',
+		'key' => $YOUR_API_KEY
+  ],
+]);
+
+$output = $response->getBody();
+// Store response as a PHP object.
+$ipDetails = json_decode($output, true);
+?>
 ```
 > This will yield the following JSON response:
 

@@ -18,12 +18,12 @@ import json
 url = 'https://api.abuseipdb.com/api/v2/bulk-report'
 
 files = {
-'csv': ('report.csv', open('report.csv', 'rb'))
+    'csv': ('report.csv', open('report.csv', 'rb'))
 }
 
 headers = {
-'Accept': 'application/json',
-'Key': '$YOUR_API_KEY'
+    'Accept': 'application/json',
+    'Key': '$YOUR_API_KEY'
 }
 
 response = requests.request(method='POST', url=url, headers=headers, files=files)
@@ -31,6 +31,31 @@ response = requests.request(method='POST', url=url, headers=headers, files=files
 # Formated output
 decodedResponse = json.loads(response.text)
 print json.dumps(decodedResponse, sort_keys=True, indent=4)
+```
+
+```php
+<?php
+$client = new GuzzleHttp\Client([
+  'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+]);
+
+$response = $client->request('POST', 'bulk-report', [
+	'multipart' => [
+    [
+      'name' => 'csv',
+      'contents' => fopen('report.csv',r)
+    ]
+	],
+	'headers' => [
+		'Accept' => 'application/json',
+		'key' => $YOUR_API_KEY
+  ],
+]);
+
+$output = $response->getBody();
+// Store response as a PHP object.
+$status = json_decode($output, true);
+?>
 ```
 > The response will inform you how many IPs were successfully reported, and which ones were rejected and why.
 

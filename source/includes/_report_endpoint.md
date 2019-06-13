@@ -16,24 +16,47 @@ import json
 # Defining the api-endpoint
 url = 'https://api.abuseipdb.com/api/v2/report'
 
-headers = {
-'Accept': 'application/json',
-'Key': '$YOUR_API_KEY'
-}
 # String holding parameters to pass in json format
 params = {
-'ip':'180.126.219.126',
-'verbose':'',
-'categories':'18,20',
-'comment':'SSH login attempts with user root.'
+    'ip':'180.126.219.126',
+    'categories':'18,20',
+    'comment':'SSH login attempts with user root.'
 }
 
+headers = {
+    'Accept': 'application/json',
+    'Key': '$YOUR_API_KEY'
+}
 
 response = requests.request(method='POST', url=url, headers=headers, params=params)
 
 # Formatted output
 decodedResponse = json.loads(response.text)
 print json.dumps(decodedResponse, sort_keys=True, indent=4)
+```
+
+```php
+<?php
+$client = new GuzzleHttp\Client([
+  'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+]);
+
+$response = $client->request('POST', 'report', [
+	'query' => [
+		'ip' => '127.0.0.1',
+		'categories' => '18,22',
+		'comment' => 'SSH login attempts with user root.'
+	],
+	'headers' => [
+		'Accept' => 'application/json',
+		'key' => $YOUR_API_KEY
+  ],
+]);
+
+$output = $response->getBody();
+// Store response as a PHP object.
+$ipDetails = json_decode($output, true);
+?>
 ```
 > Response:
 

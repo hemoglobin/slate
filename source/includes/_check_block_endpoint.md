@@ -17,14 +17,13 @@ import json
 url = 'https://api.abuseipdb.com/api/v2/check-block'
 
 querystring = {
-'network':'127.0.0.1/24',
-'maxAgeInDays':'15',
-'verbose':''
+    'network':'127.0.0.1/24',
+    'maxAgeInDays':'15',
 }
 
 headers = {
-'Accept': 'application/json',
-'Key': '$YOUR_API_KEY'
+    'Accept': 'application/json',
+    'Key': '$YOUR_API_KEY'
 }
 
 response = requests.request(method='GET', url=url, headers=headers, params=querystring)
@@ -32,6 +31,29 @@ response = requests.request(method='GET', url=url, headers=headers, params=query
 # Formatted output
 decodedResponse = json.loads(response.text)
 print json.dumps(decodedResponse, sort_keys=True, indent=4)
+```
+
+```php
+<?php
+$client = new GuzzleHttp\Client([
+  'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+]);
+
+$response = $client->request('GET', 'check-block', [
+	'query' => [
+		'network' => '127.0.0.1/24',
+		'maxAgeInDays' => '15'
+	],
+	'headers' => [
+        'Accept' => 'application/json',
+        'key' => $YOUR_API_KEY
+    ],
+]);
+
+$output = $response->getBody();
+// Store response as a PHP object.
+$blockDetails = json_decode($output, true);
+?>
 ```
 > This will yield the following JSON response:
 
