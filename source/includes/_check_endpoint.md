@@ -47,7 +47,7 @@ $response = $client->request('GET', 'check', [
 	],
 	'headers' => [
 		'Accept' => 'application/json',
-		'key' => $YOUR_API_KEY
+		'Key' => $YOUR_API_KEY
   ],
 ]);
 
@@ -72,6 +72,7 @@ $ipDetails = json_decode($output, true);
       "isp": "Tencent Cloud Computing (Beijing) Co. Ltd",
       "domain": "tencent.com",
       "totalReports": 1,
+      "numDistinctUsers": 1,
       "lastReportedAt": "2018-12-20T20:55:14+00:00",
       "reports": [
         {

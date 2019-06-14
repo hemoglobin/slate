@@ -46,7 +46,7 @@ $response = $client->request('GET', 'check-block', [
 	],
 	'headers' => [
         'Accept' => 'application/json',
-        'key' => $YOUR_API_KEY
+        'Key' => $YOUR_API_KEY
     ],
 ]);
 
