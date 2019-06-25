@@ -10,6 +10,7 @@ curl -G https://api.abuseipdb.com/api/v2/blacklist \
   -H "Key: $YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
+
 ```python
 import requests
 import json
@@ -18,7 +19,6 @@ import json
 url = 'https://api.abuseipdb.com/api/v2/blacklist'
 
 querystring = {
-    'ipAddress':'180.126.219.126',
     'countMinimum':'15',
     'maxAgeInDays':'60',
     'confidenceMinimum':'90'
@@ -59,6 +59,36 @@ $output = $response->getBody();
 $blacklist = json_decode($output, true);
 ?>
 ```
+
+```csharp
+using System;
+using RestSharp;
+using  Newtonsoft.Json;
+
+public class BlacklistEndpoint
+{
+    public static void Main()
+    {
+        var client = new RestClient("https://api.abuseipdb.com/api/v2/blacklist");
+        var request = new RestRequest(Method.GET);
+        request.AddHeader("Key", "YOUR_API_KEY");
+        request.AddHeader("Accept", "application/json");
+        request.AddParameter("countMinimum", "15");
+        request.AddParameter("maxAgeInDays", "60");
+        request.AddParameter("confidenceMinimum", "90");
+
+        IRestResponse response = client.Execute(request);
+
+        dynamic parsedJson = JsonConvert.DeserializeObject(response.Content);
+
+        foreach (var item in parsedJson)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
+```
+
 > This will yield the following JSON response:
 
 ```json

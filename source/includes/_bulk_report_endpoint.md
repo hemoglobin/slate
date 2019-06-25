@@ -10,6 +10,7 @@ curl https://api.abuseipdb.com/api/v2/bulk-report \
   -H "Accept: application/json" \
   > output.json
 ```
+
 ```python
 import requests
 import json
@@ -56,6 +57,33 @@ $output = $response->getBody();
 // Store response as a PHP object.
 $status = json_decode($output, true);
 ?>
+```
+
+```csharp
+using System;
+using RestSharp;
+using Newtonsoft.Json;
+
+public class BulkReportEndpoint
+{
+    public static void Main()
+    {
+        var client = new RestClient("https://api.abuseipdb.com/api/v2/bulk-report");
+        var request = new RestRequest(Method.POST);
+        request.AddHeader("Key", "YOUR_API_KEY");
+        request.AddHeader("Accept", "application/json");
+        request.AddFile("csv", "report.csv");
+
+        IRestResponse response = client.Execute(request);
+
+        dynamic parsedJson = JsonConvert.DeserializeObject(response.Content);
+
+        foreach (var item in parsedJson)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
 ```
 > The response will inform you how many IPs were successfully reported, and which ones were rejected and why.
 

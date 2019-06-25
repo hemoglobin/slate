@@ -9,6 +9,7 @@ curl https://api.abuseipdb.com/api/v2/report \
   -H "Key: $YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
+
 ```python
 import requests
 import json
@@ -58,6 +59,36 @@ $output = $response->getBody();
 $ipDetails = json_decode($output, true);
 ?>
 ```
+
+```csharp
+using System;
+using RestSharp;
+using Newtonsoft.Json;
+
+public class ReportEndpoint
+{
+    public static void Main()
+    {
+        var client = new RestClient("https://api.abuseipdb.com/api/v2/report");
+        var request = new RestRequest(Method.POST);
+        request.AddHeader("Key", "YOUR_API_KEY");
+        request.AddHeader("Accept", "application/json");
+        request.AddParameter("ip", "127.0.0.1");
+        request.AddParameter("categories", "8");
+        request.AddParameter("comment", "hacker!");
+
+        IRestResponse response = client.Execute(request);
+
+        dynamic parsedJson = JsonConvert.DeserializeObject(response.Content);
+
+        foreach (var item in parsedJson)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
+```
+
 > Response:
 
 ```json

@@ -9,6 +9,7 @@ curl -G https://api.abuseipdb.com/api/v2/check-block \
   -H "Key: $YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
+
 ```python
 import requests
 import json
@@ -55,6 +56,35 @@ $output = $response->getBody();
 $blockDetails = json_decode($output, true);
 ?>
 ```
+
+```csharp
+using System;
+using RestSharp;
+using Newtonsoft.Json;
+
+public class ChcekBlockEndpoint
+{
+    public static void Main()
+    {
+        var client = new RestClient("https://api.abuseipdb.com/api/v2/check-block");
+        var request = new RestRequest(Method.GET);
+        request.AddHeader("Key", "YOUR_API_KEY");
+        request.AddHeader("Accept", "application/json");
+        request.AddParameter("network", "127.0.0.1/24");
+        request.AddParameter("maxAgeInDays", "15");
+
+        IRestResponse response = client.Execute(request);
+
+        dynamic parsedJson = JsonConvert.DeserializeObject(response.Content);
+
+        foreach (var item in parsedJson)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
+```
+
 > This will yield the following JSON response:
 
 ```json
