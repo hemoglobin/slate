@@ -4,8 +4,6 @@
 # The -G option will convert form parameters (-d options) into query parameters.
 # The BLACKLIST endpoint is a GET request.
 curl -G https://api.abuseipdb.com/api/v2/blacklist \
-  -d countMinimum=15 \
-  -d maxAgeInDays=60 \
   -d confidenceMinimum=90 \
   -H "Key: $YOUR_API_KEY" \
   -H "Accept: application/json"
@@ -19,8 +17,6 @@ import json
 url = 'https://api.abuseipdb.com/api/v2/blacklist'
 
 querystring = {
-    'countMinimum':'15',
-    'maxAgeInDays':'60',
     'confidenceMinimum':'90'
 }
 
@@ -44,8 +40,6 @@ $client = new GuzzleHttp\Client([
 
 $response = $client->request('GET', 'blacklist', [
 	'query' => [
-		'countMinimum' => '15',
-		'maxAgeInDays' => '60',
 		'confidenceMinimum' => '90'
 	],
 	'headers' => [
@@ -73,8 +67,6 @@ public class BlacklistEndpoint
         var request = new RestRequest(Method.GET);
         request.AddHeader("Key", "YOUR_API_KEY");
         request.AddHeader("Accept", "application/json");
-        request.AddParameter("countMinimum", "15");
-        request.AddParameter("maxAgeInDays", "60");
         request.AddParameter("confidenceMinimum", "90");
 
         IRestResponse response = client.Execute(request);
@@ -99,17 +91,14 @@ public class BlacklistEndpoint
   "data": [
     {
       "ipAddress": "5.188.10.179",
-      "totalReports": 560,
       "abuseConfidenceScore": 100
     },
     {
       "ipAddress": "185.222.209.14",
-      "totalReports": 529,
       "abuseConfidenceScore": 100
     },
     {
       "ipAddress": "191.96.249.183",
-      "totalReports": 325,
       "abuseConfidenceScore": 100
     },
     ...
@@ -119,7 +108,7 @@ public class BlacklistEndpoint
 
 The blacklist is the culmination of all of the valiant reporting by AbuseIPDB users. It's a list of the most reported IP addresses.
 
-The body is an array where each element contains the IP address, the total number of reports, and our confidence of abuse score.
+The body is an array where each element contains the IP address and our confidence of abuse score.
 
 We recommend you filter by `abuseConfidenceScore`, which is our calculated evaluation on how abusive the IP is based on the users that reported it ([more](https://www.abuseipdb.com/faq.html#confidence)). We place a hard minimum of 25% on the abuseConfidenceScore. There are two critical reasons for this:
 
@@ -127,25 +116,18 @@ We recommend you filter by `abuseConfidenceScore`, which is our calculated evalu
 
 2. **Performance.** A <25% range is a wide net that would match the vast majority of our database. There are simply too many results for it to be performant or useful.
 
-However, you can also filter by raw report count using `countMinimum`, which effectively gives every distinct reporter an equal weight. There is a hard minimum of 10 reports for the same reasons above.
-
-The `maxAgeInDays` parameter determines how far back in time we go to fetch reports counted for the `countMinimum` parameter.
-In this example, we ask for reports no older than 60 days. The default is 30.
-
 In the `meta` block we include `generatedAt` property that lets you check for the freshness of the list, if you'd like.
 
 Subscribers may set the self flag, which configures the blacklist generator to only consider reports from their own account.
 
 <aside class="notice">
-The maxAgeInDays, countMinimum, and abuseConfidenceScore parameters are subscriber features. This is because custom blacklists take more juice to generate on-demand. Should your subscriber status lapse, an error response will not be thrown. Rather, the response will degrade gracefully to the simple blacklist. This works nicely with existing firewall software.
+The abuseConfidenceScore parameter is a subscriber feature. This is because custom blacklists take more juice to generate on-demand. Should your subscriber status lapse, an error response will not be thrown. Rather, the response will degrade gracefully to the simple blacklist. This works nicely with existing firewall software.
 </aside>
 
 ## Plaintext Blacklist
 
 ```shell
 curl -G https://api.abuseipdb.com/api/v2/blacklist \
-  -d countMinimum=15 \
-  -d maxAgeInDays=60 \
   -d confidenceMinimum=90 \
   -d plaintext \
   -H "Key: $YOUR_API_KEY" \
@@ -156,8 +138,6 @@ curl -G https://api.abuseipdb.com/api/v2/blacklist \
 ```shell
 
 curl -G https://api.abuseipdb.com/api/v2/blacklist \
-  -d countMinimum=15 \
-  -d maxAgeInDays=60 \
   -d confidenceMinimum=90 \
   -H "Key: $YOUR_API_KEY" \
   -H "Accept: text/plain"
@@ -195,8 +175,6 @@ To conserve bandwidth, the number of IP addresses included in the list is capped
 
 | field             | required | default | min | max  | subscriber feature                                |
 |-------------------|----------|---------|-----|------|---------------------------------------------------|
-| maxAgeInDays      | no       | 30      | 1   | 365  | yes                                               |
-| countMinimum      | no       | 10      | 10  | 1000 | yes                                               |
 | confidenceMinimum | no       | 100     | 25  | 100  | yes                                               |
 | limit             | no       | 10,000  | 1   |      | restricted, [see above](#blacklist-ip-truncation) |
 | plaintext         |          |         |     |      | no                                                |
