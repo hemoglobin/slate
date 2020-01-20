@@ -57,7 +57,7 @@ $blacklist = json_decode($output, true);
 ```csharp
 using System;
 using RestSharp;
-using  Newtonsoft.Json;
+using Newtonsoft.Json;
 
 public class BlacklistEndpoint
 {
@@ -169,7 +169,80 @@ By default, the blacklist with default parameters is cached for one day. Results
 
 ## Blacklist IP Truncation
 
-To conserve bandwidth, the number of IP addresses included in the list is capped to 10,000. Subscribers can overcome this limit. All users can set it between 1 and 10,000 using the `limit` parameter.
+```shell
+curl -G https://api.abuseipdb.com/api/v2/blacklist \
+  -d limit=9999999 \
+  -H "Key: $YOUR_API_KEY" \
+  -H "Accept: text/plain"
+```
+
+```python
+import requests
+import json
+
+# Defining the api-endpoint
+url = 'https://api.abuseipdb.com/api/v2/blacklist'
+
+querystring = {
+    'limit':'9999999'
+}
+
+headers = {
+    'Accept': 'text/plain,
+    'Key': '$YOUR_API_KEY'
+}
+
+response = requests.request(method='GET', url=url, headers=headers, params=querystring)
+
+# Formatted output
+print response.text
+```
+
+```php
+<?php
+$client = new GuzzleHttp\Client([
+  'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+]);
+
+$response = $client->request('GET', 'blacklist', [
+	'query' => [
+		'limit' => '9999999'
+	],
+	'headers' => [
+		'Accept' => 'text/plain',
+		'Key' => $YOUR_API_KEY
+  ],
+]);
+
+$output = $response->getBody();
+echo $output;
+?>
+```
+
+```csharp
+using System;
+using RestSharp;
+
+public class BlacklistEndpoint
+{
+    public static void Main()
+    {
+        var client = new RestClient("https://api.abuseipdb.com/api/v2/blacklist");
+        var request = new RestRequest(Method.GET);
+        request.AddHeader("Key", "YOUR_API_KEY");
+        request.AddHeader("Accept", "text/plain");
+        request.AddParameter("limit", "9999999");
+
+        IRestResponse response = client.Execute(request);
+
+        Console.WriteLine(response.Content);
+    }
+}
+```
+
+To conserve bandwidth, the number of IP addresses included in the list is capped to 10,000. Subscribers, both basic and premium, can overcome this limit. All users can set it between 1 and 10,000 using the `limit` parameter.
+
+If you are a subscriber and want to the full list, set the `limit` parameter to an absurd number like in the example (9,999,999). However, this large of a request may take a while, and firewall software such as [csf](https://www.abuseipdb.com/csf) may have trouble importing rules for over 10,000 IPs.
 
 ## Blacklist Parameters
 
