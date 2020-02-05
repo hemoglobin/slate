@@ -251,4 +251,3 @@ If you are a subscriber and want to the full list, set the `limit` parameter to 
 | confidenceMinimum | no       | 100     | 25  | 100  | yes                                               |
 | limit             | no       | 10,000  | 1   |      | restricted, [see above](#blacklist-ip-truncation) |
 | plaintext         |          |         |     |      | no                                                |
-| self              |          |         |     |      | yes                                               |
