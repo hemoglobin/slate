@@ -102,6 +102,7 @@ public class CheckEndpoint
       "usageType": "Data Center/Web Hosting/Transit",
       "isp": "Tencent Cloud Computing (Beijing) Co. Ltd",
       "domain": "tencent.com",
+      "hostnames": [],
       "totalReports": 1,
       "numDistinctUsers": 1,
       "lastReportedAt": "2018-12-20T20:55:14+00:00",
