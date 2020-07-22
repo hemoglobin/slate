@@ -47,7 +47,8 @@ You're going to need:
 1. Fork this repository on GitHub.
 2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/slate.git`
 3. `cd slate`
-4. Initialize and start Slate. You can either do this locally, or with Vagrant:
+4. Fedora users, make sure you have the zlib-devel and redhat-rpm-config installed. 
+5. Initialize and start Slate. You can either do this locally, or with Vagrant:
 
 ```shell
 # either run this to run locally
