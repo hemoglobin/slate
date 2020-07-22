@@ -102,6 +102,7 @@ public class CheckEndpoint
       "usageType": "Data Center/Web Hosting/Transit",
       "isp": "Tencent Cloud Computing (Beijing) Co. Ltd",
       "domain": "tencent.com",
+      "hostnames": [],
       "totalReports": 1,
       "numDistinctUsers": 1,
       "lastReportedAt": "2018-12-20T20:55:14+00:00",
@@ -132,7 +133,7 @@ The `isWhitelisted` property reflects whether the IP is spotted in *any* of our 
 
 The `maxAgeInDays` parameter determines how far back in time we go to fetch reports. In this example, we ask for reports no older than 90 days. The default is 30.
 
-Reports are included in this response because the `verbose` flag was added. Omitting the `verbose` flag will exclude reports and the country name field. If you want to keep your response payloads light, this is recommended.
+Reports are included in this response because the `verbose` flag was added. Omitting the `verbose` flag will exclude reports and the country name field. If you want to keep your response payloads light, this is recommended. The reports array is limited to 10,000 elements.
 
 The IP address should be url-encoded, because IPv6 addresses use colons, which are reserved characters in URIs.
 
