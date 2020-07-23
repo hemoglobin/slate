@@ -62,7 +62,7 @@ using System;
 using RestSharp;
 using Newtonsoft.Json;
 
-public class ChcekBlockEndpoint
+public class CheckBlockEndpoint
 {
     public static void Main()
     {
