@@ -19,6 +19,7 @@ includes:
   - report_endpoint
   - check_block_endpoint
   - bulk_report_endpoint
+  - clear_address_endpoint
   - rate_limits
   - errors
   - security

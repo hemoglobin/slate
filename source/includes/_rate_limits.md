@@ -29,13 +29,14 @@ X-RateLimit-Reset → 1545973200
 
 The API daily rate limits are currently as follows:
 
-|             | Standard | Webmaster | Supporter | Basic Subscription | Premium Subscription |
-|-------------|----------|-----------|-----------|--------------------|----------------------|
-| check       | 1,000    | 3,000     | 5,000     | 10,000             | 50,000               |
-| blacklist   | 5        | 10        | 20        | 100                | 500                  |
-| report      | 1,000    | 1,000     | 1,000     | 10,000             | 50,000               |
-| check-block | 100      | 250       | 500       | 1,000              | 5,000                |
-| bulk-report | 5        | 10        | 20        | 100                | 500                  |
+|               | Standard | Webmaster | Supporter | Basic Subscription | Premium Subscription |
+|---------------|----------|-----------|-----------|--------------------|----------------------|
+| check         | 1,000    | 3,000     | 5,000     | 10,000             | 50,000               |
+| blacklist     | 5        | 10        | 20        | 100                | 500                  |
+| report        | 1,000    | 1,000     | 1,000     | 10,000             | 50,000               |
+| check-block   | 100      | 250       | 500       | 1,000              | 5,000                |
+| bulk-report   | 5        | 10        | 20        | 100                | 500                  |
+| clear-address | 5        | 10        | 20        | 100                | 500                  |
 
 Upon reaching your daily limit, you will receive a HTTP 429 Too Many Requests status.
 

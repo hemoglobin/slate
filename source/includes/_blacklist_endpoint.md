@@ -166,7 +166,13 @@ If you plan into import these IPs into iptables, it is critical that the list is
 
 ## Blacklist Caching
 
-By default, the blacklist with default parameters is cached for one day. Results for premium subscribers are cached for one hour. The `generatedAt` property is the cache timestamp.
+The blacklist response for a given query is cached for 1, 6, or 24  hours depending on your plan (see table below). The `generatedAt` property is the cache timestamp. In the plaintext response, it placed in the HTTP response headers as X-Generated-At.
+
+| Plan                 | Hours Cached |
+|----------------------|--------------|
+| Individual           | 24           |
+| Basic Subscription   | 6            |
+| Premium Subscription | 1            |
 
 ## Blacklist IP Truncation
 
