@@ -86,20 +86,23 @@ public class BlacklistEndpoint
 ```json
 {
   "meta": {
-    "generatedAt": "2018-12-21T16:00:04+00:00"
+    "generatedAt": "2020-09-24T19:54:11+00:00"
   },
   "data": [
     {
       "ipAddress": "5.188.10.179",
-      "abuseConfidenceScore": 100
+      "abuseConfidenceScore": 100,
+      "lastReportedAt": "2020-09-24T19:17:02+00:00"
     },
     {
       "ipAddress": "185.222.209.14",
-      "abuseConfidenceScore": 100
+      "abuseConfidenceScore": 100,
+      "lastReportedAt": "2020-09-24T19:17:02+00:00"
     },
     {
       "ipAddress": "191.96.249.183",
-      "abuseConfidenceScore": 100
+      "abuseConfidenceScore": 100,
+      "lastReportedAt": "2020-09-24T19:17:01+00:00"
     },
     ...
   ]
@@ -108,17 +111,15 @@ public class BlacklistEndpoint
 
 The blacklist is the culmination of all of the valiant reporting by AbuseIPDB users. It's a list of the most reported IP addresses.
 
-The body is an array where each element contains the IP address and our confidence of abuse score.
+The body is an array where each element contains the IP address, confidence of abuse score, and the timestamp of the last report. Results are order by `abuseConfidenceScore` descending, and then by `lastReportedAt` descending (most recent).
 
-We recommend you filter by `abuseConfidenceScore`, which is our calculated evaluation on how abusive the IP is based on the users that reported it ([more](https://www.abuseipdb.com/faq.html#confidence)). We place a hard minimum of 25% on the abuseConfidenceScore. There are two critical reasons for this:
+`abuseConfidenceScore` is our calculated evaluation on how abusive the IP is based on the users that reported it ([more](https://www.abuseipdb.com/faq.html#confidence)). We place a hard minimum of 25% on the abuseConfidenceScore. There are two critical reasons for this:
 
 1. **To prevent a handful of reports drastically impacting networks.** If an AbuseIPDB user were to implement a blacklist that includes <25%-rated IPs, their network protocol would easily be swayed by a single or few third-party users. We recommend against the minimum of 25% for most applications. 75%-100% is the recommended range for denial of service.
 
 2. **Performance.** A <25% range is a wide net that would match the vast majority of our database. There are simply too many results for it to be performant or useful.
 
 In the `meta` block we include `generatedAt` property that lets you check for the freshness of the list, if you'd like.
-
-Subscribers may set the self flag, which configures the blacklist generator to only consider reports from their own account.
 
 <aside class="notice">
 The abuseConfidenceScore parameter is a subscriber feature. This is because custom blacklists take more juice to generate on-demand. Should your subscriber status lapse, an error response will not be thrown. Rather, the response will degrade gracefully to the simple blacklist. This works nicely with existing firewall software.
