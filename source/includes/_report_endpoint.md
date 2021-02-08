@@ -43,7 +43,7 @@ $client = new GuzzleHttp\Client([
 ]);
 
 $response = $client->request('POST', 'report', [
-	'query' => [
+	'form_params' => [
 		'ip' => '127.0.0.1',
 		'categories' => '18,22',
 		'comment' => 'SSH login attempts with user root.'
