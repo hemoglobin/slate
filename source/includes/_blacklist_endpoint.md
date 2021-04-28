@@ -164,16 +164,6 @@ The generation timestamp will be placed in the HTTP response headers as X-Genera
 <aside class="warning">
 If you plan into import these IPs into iptables, it is critical that the list is either continually updated or, if it cannot be updated, flushed from iptables. Report value decay over time, cycling out IPs that stop abusing. AbuseIPDB is not responsible for dropped connections from legitimate sources.</aside>
 
-## Blacklist Caching
-
-The blacklist response for a given query is cached for 1, 6, or 24  hours depending on your plan (see table below). The `generatedAt` property is the cache timestamp. In the plaintext response, it placed in the HTTP response headers as X-Generated-At.
-
-| Plan                 | Hours Cached |
-|----------------------|--------------|
-| Individual           | 24           |
-| Basic Subscription   | 6            |
-| Premium Subscription | 1            |
-
 ## Blacklist IP Truncation
 
 ```shell
